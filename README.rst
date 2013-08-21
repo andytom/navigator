@@ -11,4 +11,5 @@ To Do List
 - Complete README (examples, basic how to)
 - Better Comments
 - Add more Documentation (doc strings and documentation)
+- Better test coverage
 - Put in pypy
