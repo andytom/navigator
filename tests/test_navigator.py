@@ -34,6 +34,7 @@ class navigatorAddingActorsTestCase(unittest.TestCase):
 
     def test_adding_an_actor_directly(self):
         self.assertFalse('add' in self.test_nav.actors)
+
         def add():
             return 1 + 2
         actor = navigator.Actor('add', '', add)
@@ -77,6 +78,7 @@ class navigatorAddingActorsTestCase(unittest.TestCase):
 
         with self.assertRaises(NameError, msg="Name 'add' is already assigned"):
             self.test_nav._add_actor(actor_2)
+
 
 class navigatorAddingAssistantTestCase(unittest.TestCase):
     def setUp(self):

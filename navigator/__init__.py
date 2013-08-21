@@ -17,10 +17,15 @@ from . import ui, decorators
 # TODO - Add better comments
 
 
+#-----------------------------------------------------------------------------#
+# Helper Functions
+#-----------------------------------------------------------------------------#
 def do_nothing():
     pass
 
 
+#-----------------------------------------------------------------------------#
+# Main Classes
 #-----------------------------------------------------------------------------#
 class Navigator(object):
     def __init__(self, message, intro=None):
@@ -65,7 +70,7 @@ class Navigator(object):
         picked = ui.choice(self.message, choices)
         ui.text_success("Selected {}".format(picked.name))
         picked.run()
-    
+
     def run(self):
         self.display_info()
         while True:
@@ -89,6 +94,7 @@ class Assistant(Navigator):
     def run(self):
         self._do_run()
 
+
 class Actor(object):
     def __init__(self, name, func, blurb=""):
         self.name = name
@@ -97,7 +103,7 @@ class Actor(object):
         if blurb:
             self.label = "{} - {}".format(name, blurb)
         else:
-           self.label = name
+            self.label = name
 
     def __repr__(self):
         return "<Actor {}>".format(self.label)

@@ -61,7 +61,7 @@ class UIChoicesTestCase(unittest.TestCase):
 
     def test_choice_invalid_selection(self):
         choices = [("Male", "M"), ("Female", "F")]
-        with mock.patch("six.moves.input", side_effect=['100','0']):
+        with mock.patch("six.moves.input", side_effect=['100', '0']):
             res = ui.choice("Test Message", choices)
             self.assertEqual(res, "M")
 
