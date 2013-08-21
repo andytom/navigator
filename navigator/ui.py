@@ -14,21 +14,23 @@ def _prompt_for_input(message):
 #-----------------------------------------------------------------------------#
 # Text Output
 #-----------------------------------------------------------------------------#
-# TODO - Investigate refactoring this to have less duplciate code
+def _text_out(colour_code, message, end):
+    print("\x1b[{}m{}\x1b[0m".format(colour_code, message), end=end)
+
 def text_prompt(message, end="\n"):
-    print("\x1b[33m{}\x1b[0m".format(message), end=end)
+    _text_out(33, message, end)
 
 
 def text_info(message, end="\n"):
-    print("\x1b[37m{}\x1b[0m".format(message), end=end)
+    _text_out(37, message, end)
 
 
 def text_success(message, end="\n"):
-    print("\x1b[32m{}\x1b[0m".format(message), end=end)
+    _text_out(32, message, end)
 
 
 def text_error(message, end="\n"):
-    print("\x1b[31m{}\x1b[0m".format(message), end=end)
+    _text_out(31, message, end)
 
 
 #-----------------------------------------------------------------------------#
