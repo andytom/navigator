@@ -1,3 +1,14 @@
+"""
+    Navigator
+    ---------
+
+    Navigator is a simple framework for creating simple, interactive
+    command line tools.
+
+    :copyright: (c) 2013 by Thomas O'Donnell.
+    :license: BSD, see LICENSE for more details.
+    :version: 0.0.1
+"""
 from functools import wraps
 import sys
 
@@ -16,14 +27,14 @@ class Navigator(object):
         self.actors = {}
         self.message = message
         self.intro = intro
-        self.completed = Actor('quit', '', sys.exit)
+        self.completed = Actor('quit', sys.exit)
 
     def _add_actor(self, actor):
         if actor.name in self.actors:
             raise NameError("Name '{}' is already assigned".format(actor.name))
         self.actors[actor.name] = actor
 
-    def route(self, name, blurb):
+    def route(self, name, blurb=""):
         """Decorator for registering functions"""
         def inner(f):
             actor = Actor(name, blurb, f)
@@ -67,7 +78,7 @@ class Assistant(Navigator):
         self.blurb = blurb
         self.name = name
         self.label = "{} - {}".format(name, blurb)
-        self.completed = Actor('back', '', do_nothing)
+        self.completed = Actor('back', do_nothing)
 
     def __repr__(self):
         return "<Assistant {}>".format(self.label)
@@ -79,7 +90,7 @@ class Assistant(Navigator):
         self._do_run()
 
 class Actor(object):
-    def __init__(self, name, blurb, func):
+    def __init__(self, name, func, blurb=""):
         self.name = name
         self.blurb = blurb
         self.func = func
