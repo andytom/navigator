@@ -1,3 +1,4 @@
+import sys
 import unittest
 
 import navigator
@@ -6,7 +7,20 @@ import navigator
 #-----------------------------------------------------------------------------#
 # Test Cases
 #-----------------------------------------------------------------------------#
-class navigatorTestCase(unittest.TestCase):
+class navigatorBasicFunctionalityTestCase(unittest.TestCase):
+    def setUp(self):
+        self.test_nav = navigator.Navigator(__name__)
+
+    def test_calling_an_actor(self):
+        @self.test_nav.route('test')
+        def test():
+            return 'OK'
+        self.assertTrue('test' in self.test_nav.actors)
+        result = self.test_nav.actors['test'].run()
+        self.assertEqual(result, "OK")
+
+
+class navigatorAddingActorsTestCase(unittest.TestCase):
     def setUp(self):
         self.test_nav = navigator.Navigator(__name__)
 
@@ -25,12 +39,6 @@ class navigatorTestCase(unittest.TestCase):
         actor = navigator.Actor('add', '', add)
         self.test_nav._add_actor(actor)
         self.assertTrue('add' in self.test_nav.actors)
-
-    def test_registering_an_assistant(self):
-        self.assertFalse('Powers' in self.test_nav.actors)
-        assistant = navigator.Assistant("Powers", "Tools for powers", "Prompt")
-        self.test_nav.register_assistant(assistant)
-        self.assertTrue('Powers' in self.test_nav.actors)
 
     def test_adding_a_route_via_decorator_cannot_replace(self):
         @self.test_nav.route('add', 'add 1 + 2 and return the result')
@@ -69,6 +77,16 @@ class navigatorTestCase(unittest.TestCase):
 
         with self.assertRaises(NameError, msg="Name 'add' is already assigned"):
             self.test_nav._add_actor(actor_2)
+
+class navigatorAddingAssistantTestCase(unittest.TestCase):
+    def setUp(self):
+        self.test_nav = navigator.Navigator(__name__)
+
+    def test_registering_an_assistant(self):
+        self.assertFalse('Powers' in self.test_nav.actors)
+        assistant = navigator.Assistant("Powers", "Tools for powers", "Prompt")
+        self.test_nav.register_assistant(assistant)
+        self.assertTrue('Powers' in self.test_nav.actors)
 
     def test_adding_a_route_to_an_assistant(self):
         assistant = navigator.Assistant("Powers", "Tools for powers", "Prompt")

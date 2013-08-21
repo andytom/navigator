@@ -37,7 +37,7 @@ class Navigator(object):
     def route(self, name, blurb=""):
         """Decorator for registering functions"""
         def inner(f):
-            actor = Actor(name, blurb, f)
+            actor = Actor(name, f, blurb)
             self._add_actor(actor)
 
             @wraps(f)
@@ -103,4 +103,4 @@ class Actor(object):
         return "<Actor {}>".format(self.label)
 
     def run(self):
-        self.func()
+        return self.func()
