@@ -1,7 +1,9 @@
 from functools import wraps
+import sys
 
 from . import ui, decorators
 # TODO - Add doc strings
+# TODO - Add better comments
 
 
 def do_nothing():
@@ -14,7 +16,7 @@ class Navigator(object):
         self.actors = {}
         self.message = message
         self.intro = intro
-        self.completed = Actor('quit', 'exit', do_nothing)
+        self.completed = Actor('quit', '', sys.exit)
 
     def _add_actor(self, actor):
         if actor.name in self.actors:
@@ -44,8 +46,7 @@ class Navigator(object):
             ui.text_info(self.intro)
 
     @decorators.catch_exit_keys
-    def run(self):
-        self.display_info()
+    def _do_run(self):
         choices = [(self.completed.label, self.completed)]
         for key in iter(self.actors):
             actor = self.actors[key]
@@ -53,6 +54,11 @@ class Navigator(object):
         picked = ui.choice(self.message, choices)
         ui.text_success("Selected {}".format(picked.name))
         picked.run()
+    
+    def run(self):
+        self.display_info()
+        while True:
+            self._do_run()
 
 
 class Assistant(Navigator):
@@ -61,6 +67,7 @@ class Assistant(Navigator):
         self.blurb = blurb
         self.name = name
         self.label = "{} - {}".format(name, blurb)
+        self.completed = Actor('back', '', do_nothing)
 
     def __repr__(self):
         return "<Assistant {}>".format(self.label)
@@ -68,12 +75,18 @@ class Assistant(Navigator):
     def display_info(self):
         ui.text_info(self.label)
 
+    def run(self):
+        self._do_run()
+
 class Actor(object):
     def __init__(self, name, blurb, func):
         self.name = name
         self.blurb = blurb
         self.func = func
-        self.label = "{} - {}".format(name, blurb)
+        if blurb:
+            self.label = "{} - {}".format(name, blurb)
+        else:
+           self.label = name
 
     def __repr__(self):
         return "<Actor {}>".format(self.label)
