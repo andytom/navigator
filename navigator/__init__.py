@@ -33,7 +33,8 @@ def do_nothing():
 # Main Classes
 #-----------------------------------------------------------------------------#
 class Navigator(object):
-    def __init__(self, message, intro=None, done_name='quit'):
+    def __init__(self, message="What do you want to do?", intro=None, 
+                 done_name='quit'):
         self.actors = {}
         self.message = message
         self.intro = intro
@@ -83,7 +84,8 @@ class Navigator(object):
 
 
 class Assistant(Navigator):
-    def __init__(self, name, blurb, message, done_name='back'):
+    def __init__(self, name, blurb, message="What do you want to do?",
+                 done_name='back'):
         super(Assistant, self).__init__(message=message)
         self.blurb = blurb
         self.name = name
