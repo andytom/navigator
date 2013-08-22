@@ -7,7 +7,6 @@
 
     :copyright: (c) 2013 by Thomas O'Donnell.
     :license: BSD, see LICENSE for more details.
-    :version: 0.0.1
 """
 from functools import wraps
 import sys
@@ -15,6 +14,12 @@ import sys
 from . import ui, decorators
 # TODO - Add doc strings
 # TODO - Add better comments
+
+
+#-----------------------------------------------------------------------------#
+# Meta Stuff
+#-----------------------------------------------------------------------------#
+__version__ = '0.0.1'
 
 
 #-----------------------------------------------------------------------------#

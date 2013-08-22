@@ -1,8 +1,11 @@
 from distutils.core import setup
 
+import navigator
+
+
 setup(
     name="Navigator",
-    version="0.0.1",
+    version=navigator.__version__,
     author="Thomas O'Donnell",
     author_email="",
     url="https://github.com/Andytom/navigator",
