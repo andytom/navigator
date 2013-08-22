@@ -28,11 +28,11 @@ def do_nothing():
 # Main Classes
 #-----------------------------------------------------------------------------#
 class Navigator(object):
-    def __init__(self, message, intro=None):
+    def __init__(self, message, intro=None, done_name='quit'):
         self.actors = {}
         self.message = message
         self.intro = intro
-        self.completed = Actor('quit', sys.exit)
+        self.completed = Actor(done_name, sys.exit)
 
     def _add_actor(self, actor):
         if actor.name in self.actors:
@@ -78,12 +78,12 @@ class Navigator(object):
 
 
 class Assistant(Navigator):
-    def __init__(self, name, blurb, message):
+    def __init__(self, name, blurb, message, done_name='back'):
         super(Assistant, self).__init__(message=message)
         self.blurb = blurb
         self.name = name
         self.label = "{} - {}".format(name, blurb)
-        self.completed = Actor('back', do_nothing)
+        self.completed = Actor(done_name, do_nothing)
 
     def __repr__(self):
         return "<Assistant {}>".format(self.label)
