@@ -9,7 +9,7 @@ import navigator
 #-----------------------------------------------------------------------------#
 class navigatorBasicFunctionalityTestCase(unittest.TestCase):
     def setUp(self):
-        self.test_nav = navigator.Navigator(__name__)
+        self.test_nav = navigator.Navigator(message="")
 
     def test_calling_an_actor(self):
         @self.test_nav.route('test')
@@ -22,7 +22,7 @@ class navigatorBasicFunctionalityTestCase(unittest.TestCase):
 
 class navigatorAddingActorsTestCase(unittest.TestCase):
     def setUp(self):
-        self.test_nav = navigator.Navigator(__name__)
+        self.test_nav = navigator.Navigator(message="")
 
     def test_adding_a_route_via_decorator(self):
         self.assertFalse('add' in self.test_nav.actors)
@@ -82,7 +82,7 @@ class navigatorAddingActorsTestCase(unittest.TestCase):
 
 class navigatorAddingAssistantTestCase(unittest.TestCase):
     def setUp(self):
-        self.test_nav = navigator.Navigator(__name__)
+        self.test_nav = navigator.Navigator(message="")
 
     def test_registering_an_assistant(self):
         self.assertFalse('Powers' in self.test_nav.actors)
