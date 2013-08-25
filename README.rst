@@ -26,6 +26,9 @@ Navigator also includes prompts for user input ::
     >>>     name = navigator.ui.prompt("What is your name?")
     >>>     navigator.ui.text_success("Hello {}!".format(name))
 
+
+There are more complete examples in the examples directory.
+
 To Do List
 ----------
 - Complete README (examples, basic how to)
