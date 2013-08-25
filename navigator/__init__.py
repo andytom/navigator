@@ -34,11 +34,12 @@ def do_nothing():
 #-----------------------------------------------------------------------------#
 class Navigator(object):
     def __init__(self, message="What do you want to do?", intro=None,
-                 done_name='quit'):
+                 done_name='quit', no_confirm=True):
         self.actors = {}
         self.message = message
         self.intro = intro
         self.completed = Actor(done_name, sys.exit)
+        self.no_confirm = no_confirm
 
     def _add_actor(self, actor):
         if actor.name in self.actors:
@@ -74,7 +75,7 @@ class Navigator(object):
             actor = self.actors[key]
             choices.append((actor.label, actor))
         picked = ui.choice(self.message, choices)
-        if ui.confirm("Run {}?".format(picked.name), True):
+        if self.no_confirm or ui.confirm("Run {}?".format(picked.name), True):
             picked.run()
 
     def run(self):
@@ -85,8 +86,8 @@ class Navigator(object):
 
 class Assistant(Navigator):
     def __init__(self, name, blurb, message="What do you want to do?",
-                 done_name='back'):
-        super(Assistant, self).__init__(message=message)
+                 done_name='back', no_confirm=True):
+        super(Assistant, self).__init__(message=message,no_confirm=no_confirm)
         self.blurb = blurb
         self.name = name
         self.label = "{} - {}".format(name, blurb)
