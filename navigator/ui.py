@@ -16,6 +16,7 @@ def _prompt_for_input(message):
 def _text_out(colour_code, message, end):
     six.print_("\x1b[{}m{}\x1b[0m".format(colour_code, message), end=end)
 
+
 def text_prompt(message, end="\n"):
     _text_out(33, message, end)
 
