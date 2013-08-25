@@ -7,7 +7,7 @@ Example
 A basic Hello World example ::
 
     >>> import navigator
-    >>> nav = navigator.Navigator(intro="Welcome", message="What do you want to do?")
+    >>> nav = navigator.Navigator(intro="Welcome")
     >>> @nav.route('Hello World', "A simple Hello World")
     >>> def hello_world():
     >>>     navigator.ui.text_success("Hello World!")
@@ -32,4 +32,4 @@ To Do List
 - Better Comments
 - Add more Documentation (doc strings and documentation)
 - Better test coverage
-- Put in pypy
+- Put on pypy
