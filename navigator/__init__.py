@@ -33,7 +33,7 @@ def do_nothing():
 # Main Classes
 #-----------------------------------------------------------------------------#
 class Navigator(object):
-    def __init__(self, message="What do you want to do?", intro=None, 
+    def __init__(self, message="What do you want to do?", intro=None,
                  done_name='quit'):
         self.actors = {}
         self.message = message
@@ -74,8 +74,8 @@ class Navigator(object):
             actor = self.actors[key]
             choices.append((actor.label, actor))
         picked = ui.choice(self.message, choices)
-        ui.text_success("Selected {}".format(picked.name))
-        picked.run()
+        if ui.confirm("Run {}?".format(picked.name), True):
+            picked.run()
 
     def run(self):
         self.display_info()
