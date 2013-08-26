@@ -69,7 +69,7 @@ def choice(message, choices):
         return choices[0][1]
     while True:
         for i, choice in enumerate(choices):
-            text_prompt("{} - {}".format(i, choice[0]))
+            text_prompt("  {} - {}".format(i, choice[0]))
         picked = prompt(message, "int")
         try:
             return choices[picked][1]
