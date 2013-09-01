@@ -84,6 +84,7 @@ class Assistant(Navigator):
         ui.text_info(self.label)
 
     def run(self):
+        self.display_info()
         self._do_run()
 
 
