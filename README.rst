@@ -29,10 +29,13 @@ Navigator also includes prompts for user input ::
 
 There are more complete examples in the examples directory.
 
+How to Install
+--------------
+    pip install navigator
+
 To Do List
 ----------
 - Complete README (examples, basic how to)
 - Better Comments
 - Add more Documentation (doc strings and documentation)
 - Better test coverage
-- Put on pypy

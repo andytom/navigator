@@ -1,1 +1,2 @@
+v0.2.0, 2013-09-02 -- Fix Setup.py to not be so outdated.
 v0.1.0, 2013-09-01 -- Initial release.
