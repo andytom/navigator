@@ -9,19 +9,19 @@ intro = """
 |_____|_| |_|\__|_|  \___/ 
 """                                      
 
-direct = navigator.Navigator(intro=intro)
+nav = navigator.Navigator(intro=intro)
 
-@direct.route('Add', "Add 1 to 3 and print the result")
+@nav.route('Add', "Add 1 to 3 and print the result")
 def add():
     navigator.ui.text_success(1 + 3)
 
-@direct.route('Sub', "Subtract 3 from 1 and print the result")
+@nav.route('Sub', "Subtract 3 from 1 and print the result")
 def sub():
     navigator.ui.text_success(1 - 3)
 
 
 assistant = navigator.Assistant("Powers", "Stuff for powers", "Select one:")
-direct.register_assistant(assistant)
+nav.register_assistant(assistant)
 
 
 @assistant.route('Square', "Squares the number 3 and prints the result")
@@ -35,4 +35,4 @@ def cube():
 
 
 if __name__ == "__main__":
-    direct.run()
+    nav.run()
