@@ -17,7 +17,8 @@ A basic Hello World example ::
     1 - Hello World - A simple Hello World
     What do you want to do?
 
-You can then select the option you would like to take. Entering one runs hello_world.
+You can then select the option you would like to take.
+Entering '1' runs hello_world.
 
 Navigator also includes prompts for user input ::
 
@@ -31,11 +32,17 @@ There are more complete examples in the examples directory.
 
 How to Install
 --------------
+Navigator can be install from pypi using pip ::
+
     pip install navigator
+
+Python Support
+--------------
+Navigator is currently only tested against python 2.7 and python 3.2.
 
 To Do List
 ----------
 - Complete README (examples, basic how to)
 - Better Comments
 - Add more Documentation (doc strings and documentation)
-- Better test coverage
+- More complete test coverage and better tests
