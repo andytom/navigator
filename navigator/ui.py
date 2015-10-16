@@ -10,6 +10,23 @@ def _prompt_for_input(message):
     return six.moves.input()
 
 
+class ColorsFormats(object):
+    """
+        Enum like class that define possible colours and formats
+        and those that are used for the different text ui types.
+    """
+    # Formats
+    bold = 1
+    # Foreground colours
+    black, red, green, yellow, blue, magenta, cyan, light_grey = range(30, 38)
+    dark_grey, light_red, light_green, light_yellow, light_blue, light_magenta, light_cyan, white = range(90, 98)
+    # Background colours
+    bg_black, bg_red, bg_green, bg_yellow, bg_blue, bg_magenta, bg_cyan, bg_grey = range(40, 48)
+    bg_dark_grey, bg_light_red, bg_light_green, bg_light_yellow, bg_light_blue, bg_light_magenta, bg_light_cyan, bg_white = range(100, 108)
+    # Attributes to be used by the ui.text methods
+    prompt, info, success, error = yellow, light_grey, green, red
+
+
 #-----------------------------------------------------------------------------#
 # Text Output
 #-----------------------------------------------------------------------------#
@@ -18,19 +35,19 @@ def _text_out(colour_code, message, end):
 
 
 def text_prompt(message, end="\n"):
-    _text_out(33, message, end)
+    _text_out(ColorsFormats.prompt, message, end)
 
 
 def text_info(message, end="\n"):
-    _text_out(37, message, end)
+    _text_out(ColorsFormats.info, message, end)
 
 
 def text_success(message, end="\n"):
-    _text_out(32, message, end)
+    _text_out(ColorsFormats.success, message, end)
 
 
 def text_error(message, end="\n"):
-    _text_out(31, message, end)
+    _text_out(ColorsFormats.error, message, end)
 
 
 #-----------------------------------------------------------------------------#
@@ -38,6 +55,8 @@ def text_error(message, end="\n"):
 #-----------------------------------------------------------------------------#
 def prompt(message, expected_type='str', default=None):
     while True:
+        if default is not None:
+            message += " [Default: {}]".format(default)
         raw = _prompt_for_input(message)
         if default is not None and not raw:
             raw = default
@@ -64,13 +83,13 @@ def confirm(message, default=False):
     return res.lower().startswith('y')
 
 
-def choice(message, choices):
+def choice(message, choices, default=None):
     if len(choices) == 1:
         return choices[0][1]
     while True:
         for i, choice in enumerate(choices):
             text_prompt("  {} - {}".format(i, choice[0]))
-        picked = prompt(message, "int")
+        picked = prompt(message, "int", default)
         try:
             return choices[picked][1]
         except IndexError:
