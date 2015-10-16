@@ -1,5 +1,7 @@
 from functools import wraps
 import sys
+from collections import OrderedDict
+
 
 from . import ui, decorators
 # TODO - Add doc strings
@@ -18,12 +20,13 @@ def do_nothing():
 #-----------------------------------------------------------------------------#
 class Navigator(object):
     def __init__(self, message="What do you want to do?", intro=None,
-                 done_name='quit', no_confirm=True):
-        self.actors = {}
+                 done_name='quit', no_confirm=True, default_choice=None):
+        self.actors = OrderedDict()
         self.message = message
         self.intro = intro
         self.completed = Actor(done_name, sys.exit)
         self.no_confirm = no_confirm
+        self.default_choice = default_choice
 
     def _add_actor(self, actor):
         if actor.name in self.actors:
@@ -58,7 +61,7 @@ class Navigator(object):
         for key in iter(self.actors):
             actor = self.actors[key]
             choices.append((actor.label, actor))
-        picked = ui.choice(self.message, choices)
+        picked = ui.choice(self.message, choices, self.default_choice)
         if self.no_confirm or ui.confirm("Run {}?".format(picked.name), True):
             picked.run()
 
@@ -70,8 +73,8 @@ class Navigator(object):
 
 class Assistant(Navigator):
     def __init__(self, name, blurb, message="What do you want to do?",
-                 done_name='back', no_confirm=True):
-        super(Assistant, self).__init__(message=message, no_confirm=no_confirm)
+                 done_name='back', no_confirm=True, default_choice=None):
+        super(Assistant, self).__init__(message=message, no_confirm=no_confirm, default_choice=default_choice)
         self.blurb = blurb
         self.name = name
         self.label = "{} - {}".format(name, blurb)
