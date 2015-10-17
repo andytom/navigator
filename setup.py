@@ -31,8 +31,17 @@ setup(
     packages=find_packages(),
     description="A framework to create simple, interactive command line tools.",
     long_description=read("README.rst"),
-    install_requires=[
-        "six"
-    ],
-    tests_require=["tox"]
+    classifiers=(
+        'Development Status :: 3 - Alpha',
+        'Environment :: Console',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.2',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+    )
+    install_requires=read('requirements.txt'),
+    tests_require=["mock"]
 )
