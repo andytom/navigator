@@ -1,5 +1,9 @@
 Navigator
 =========
+
+.. image:: https://travis-ci.org/andytom/navigator.svg?branch=master
+    :target: https://travis-ci.org/andytom/navigator
+
 A framework to create simple, interactive command line tools.
 
 Example
