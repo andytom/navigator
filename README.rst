@@ -38,7 +38,7 @@ Navigator can be install from pypi using pip ::
 
 Python Support
 --------------
-Navigator is currently only tested against python 2.7 and python 3.2.
+Navigator is currently tested against python 2.7, 3.2, 3.3, 3.4 and 3.5.
 
 To Do List
 ----------

@@ -1,0 +1,15 @@
+language: python
+
+python:
+  - "2.7"
+  - "3.2"
+  - "3.3"
+  - "3.4"
+  - "3.5"
+
+# command to run tests
+script: python test.py
+
+# Don't send email notifications
+notifications:
+  email: false
