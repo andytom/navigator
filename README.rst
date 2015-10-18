@@ -22,7 +22,7 @@ A basic Hello World example ::
     What do you want to do?
 
 You can then select the option you would like to take.
-Entering '1' runs hello_world.
+Entering '1' call the hello_world function.
 
 Navigator also includes prompts for user input ::
 
@@ -40,9 +40,21 @@ Navigator can be install from pypi using pip ::
 
     pip install navigator
 
-Python Support
---------------
+Python Support and Versioning
+-----------------------------
 Navigator is currently tested against python 2.7, 3.2, 3.3, 3.4 and 3.5.
+
+Navigator follows `SemVar <http://semver.org/>`_ as such the Public API should
+not be considered stable until version 1.0.0.
+
+Testing
+-------
+You can run the test suite locally by running: ::
+
+    python test.py
+
+This requires that 'mock' is installed. In addition all tests are run automatically on
+`TravisCI <https://travis-ci.org/andytom/navigator>`_.
 
 To Do List
 ----------
