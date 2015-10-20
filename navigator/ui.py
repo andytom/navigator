@@ -60,7 +60,7 @@ def prompt(message, expected_type='str', default=None):
         raw = _prompt_for_input(message)
         if default is not None and not raw:
             raw = default
-        if raw and expected_type == 'int':
+        if (raw or raw == 0)and expected_type == 'int':
             try:
                 return int(raw)
             except ValueError:
