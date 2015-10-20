@@ -91,6 +91,8 @@ def choice(message, choices, default=None):
             text_prompt("  {} - {}".format(i, choice[0]))
         picked = prompt(message, "int", default)
         try:
+            if picked < 0:
+                raise IndexError()
             return choices[picked][1]
         except IndexError:
             text_error("That is not a valid selection")
