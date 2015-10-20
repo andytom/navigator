@@ -54,9 +54,9 @@ def text_error(message, end="\n"):
 # User Input
 #-----------------------------------------------------------------------------#
 def prompt(message, expected_type='str', default=None):
+    if default is not None:
+        message += " [Default: {}]".format(default)
     while True:
-        if default is not None:
-            message += " [Default: {}]".format(default)
         raw = _prompt_for_input(message)
         if default is not None and not raw:
             raw = default
