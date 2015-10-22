@@ -54,13 +54,13 @@ def text_error(message, end="\n"):
 # User Input
 #-----------------------------------------------------------------------------#
 def prompt(message, expected_type='str', default=None):
+    if default is not None:
+        message += " [Default: {}]".format(default)
     while True:
-        if default is not None:
-            message += " [Default: {}]".format(default)
         raw = _prompt_for_input(message)
         if default is not None and not raw:
             raw = default
-        if raw and expected_type == 'int':
+        if (raw or raw == 0)and expected_type == 'int':
             try:
                 return int(raw)
             except ValueError:
@@ -91,6 +91,8 @@ def choice(message, choices, default=None):
             text_prompt("  {} - {}".format(i, choice[0]))
         picked = prompt(message, "int", default)
         try:
+            if picked < 0:
+                raise IndexError()
             return choices[picked][1]
         except IndexError:
             text_error("That is not a valid selection")
