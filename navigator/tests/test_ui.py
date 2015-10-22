@@ -20,12 +20,16 @@ class UIPromptTestCase(unittest.TestCase):
             self.assertEqual(res, "Test")
 
     def test_prompt_int(self):
-        with mock.patch("six.moves.input", return_value=1):
+        with mock.patch("six.moves.input", return_value="1"):
             res = ui.prompt("Test Message", "int")
             self.assertEqual(res, 1)
 
+        with mock.patch("six.moves.input", return_value="0"):
+            res = ui.prompt("Test Message", "int")
+            self.assertEqual(res, 0)
+
     def test_prompt_str_as_int(self):
-        with mock.patch("six.moves.input", side_effect=["one", 1]):
+        with mock.patch("six.moves.input", side_effect=["one", "1"]):
             res = ui.prompt("Test Message", "int")
             self.assertEqual(res, 1)
 
@@ -65,6 +69,10 @@ class UIChoicesTestCase(unittest.TestCase):
             res = ui.choice("Test Message", choices)
             self.assertEqual(res, "M")
 
+        with mock.patch("six.moves.input", side_effect=["-1", '0']):
+            res = ui.choice("Test Message", choices)
+            self.assertEqual(res, "M")
+
 
 class UITextTestCase(unittest.TestCase):
     def _run_text_test(self, function, expected_output, *args):
@@ -76,37 +84,29 @@ class UITextTestCase(unittest.TestCase):
         actual_output = sys.stdout.getvalue()
         self.assertEqual(actual_output, expected_output)
 
-    def test_test_text_prompt_no_end(self):
-        self._run_text_test(ui.text_prompt, "\x1b[33mTest\x1b[0m\n",
-                            "Test")
+    def test_text_prompt_no_end(self):
+        self._run_text_test(ui.text_prompt, "\x1b[33mTest\x1b[0m\n", "Test")
 
-    def test_test_text_success_no_end(self):
-        self._run_text_test(ui.text_success, "\x1b[32mTest\x1b[0m\n",
-                            "Test")
+    def test_text_success_no_end(self):
+        self._run_text_test(ui.text_success, "\x1b[32mTest\x1b[0m\n", "Test")
 
-    def test_test_text_error_no_end(self):
-        self._run_text_test(ui.text_error, "\x1b[31mTest\x1b[0m\n",
-                            "Test")
+    def test_text_error_no_end(self):
+        self._run_text_test(ui.text_error, "\x1b[31mTest\x1b[0m\n", "Test")
 
-    def test_test_text_info_no_end(self):
-        self._run_text_test(ui.text_info, "\x1b[37mTest\x1b[0m\n",
-                            "Test")
+    def test_text_info_no_end(self):
+        self._run_text_test(ui.text_info, "\x1b[37mTest\x1b[0m\n", "Test")
 
-    def test_test_text_prompt_with_end(self):
-        self._run_text_test(ui.text_prompt, "\x1b[33mTest\x1b[0m",
-                            "Test", "")
+    def test_text_prompt_with_end(self):
+        self._run_text_test(ui.text_prompt, "\x1b[33mTest\x1b[0m", "Test", "")
 
-    def test_test_text_success_with_end(self):
-        self._run_text_test(ui.text_success, "\x1b[32mTest\x1b[0m",
-                            "Test", "")
+    def test_text_success_with_end(self):
+        self._run_text_test(ui.text_success, "\x1b[32mTest\x1b[0m", "Test", "")
 
-    def test_test_text_error_with_end(self):
-        self._run_text_test(ui.text_error, "\x1b[31mTest\x1b[0m",
-                            "Test", "")
+    def test_text_error_with_end(self):
+        self._run_text_test(ui.text_error, "\x1b[31mTest\x1b[0m", "Test", "")
 
-    def test_test_text_info_with_end(self):
-        self._run_text_test(ui.text_info, "\x1b[37mTest\x1b[0m",
-                            "Test", "")
+    def test_text_info_with_end(self):
+        self._run_text_test(ui.text_info, "\x1b[37mTest\x1b[0m", "Test", "")
 
 
 #-----------------------------------------------------------------------------#
