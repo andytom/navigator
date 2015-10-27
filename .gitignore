@@ -2,3 +2,4 @@
 */__pycache__/*
 Navigator.egg-info/*
 dist/*
+build/*
