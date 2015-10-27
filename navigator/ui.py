@@ -10,7 +10,7 @@ def _prompt_for_input(message):
     return six.moves.input()
 
 
-class ColorsFormats(object):
+class ColoursFormats(object):
     """
         Enum like class that define possible colours and formats
         and those that are used for the different text ui types.
@@ -25,6 +25,10 @@ class ColorsFormats(object):
     bg_dark_grey, bg_light_red, bg_light_green, bg_light_yellow, bg_light_blue, bg_light_magenta, bg_light_cyan, bg_white = range(100, 108)
     # Attributes to be used by the ui.text methods
     prompt, info, success, error = yellow, light_grey, green, red
+
+
+# Alias for none UK users
+ColorsFormats = ColoursFormats
 
 
 #-----------------------------------------------------------------------------#
